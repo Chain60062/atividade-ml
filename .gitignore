@@ -1,20 +1,4 @@
-# Jupyter
 .ipynb_checkpoints/
-
-# Python
 __pycache__/
-*.py[cod]
-
-# Ambientes virtuais
 .venv/
 venv/
-env/
-
-# Sistema
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# Editores
-.vscode/
-.idea/

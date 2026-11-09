@@ -1,73 +1,48 @@
-# Atividade de Machine Learning: classificação e regressão
+# Atividade de Machine Learning
 
-Notebook da atividade de Machine Learning com dois problemas:
+Notebook com duas etapas de aprendizado supervisionado em Python:
 
-- **Parte 1, classificação:** diagnóstico de tumores de mama (benigno ou maligno) com o dataset *Breast Cancer Wisconsin*.
-- **Parte 2, regressão:** previsão do valor de imóveis com Regressão Linear usando o *California Housing*.
+1. **Classificação** de tumores de mama (benigno x maligno) com Regressão Logística, usando o dataset Breast Cancer Wisconsin.
+2. **Regressão Linear** para prever o valor de imóveis, usando o dataset California Housing.
 
-O trabalho está todo em [`Atividade_ML_Vinicius.ipynb`](Atividade_ML_Vinicius.ipynb), que já está salvo com as saídas. Dá para ler direto no GitHub sem rodar nada.
+Tudo está em `Atividade_ML_Vinicius.ipynb`, já salvo com as saídas e os gráficos, então dá para ler direto pelo GitHub sem executar nada.
 
-## Resultados principais
+## Como executar
 
-| Problema | Modelo | Resultado no conjunto de teste |
-|---|---|---|
-| Classificação | Regressão Logística (com padronização) | Accuracy 0,965 · Precision 0,975 · Recall 0,929 · F1 0,951 |
-| Classificação | mesma, com limiar ajustado para 0,30 | Accuracy 0,982 · Recall 0,976 (falsos negativos: 3 → 1) |
-| Regressão | Regressão Linear | MAE 0,533 · MSE 0,556 · RMSE 0,746 · R² 0,576 |
+Precisa de Python 3.10 ou mais novo. Na primeira execução é necessário estar conectado à internet, porque o scikit-learn baixa o California Housing (o Breast Cancer já vem na biblioteca).
 
-A discussão dos resultados e das limitações está nas seções 7 e 8 do notebook.
+### Só com Python (pip)
 
-## Como rodar
+```bash
+python -m venv .venv
+source .venv/bin/activate        # no Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+jupyter lab Atividade_ML_Vinicius.ipynb
+```
 
-### Opção 1: conda / Miniforge
+### Com conda
 
 ```bash
 conda env create -f environment.yml
 conda activate atividade-ml
-jupyter lab
+jupyter lab Atividade_ML_Vinicius.ipynb
 ```
 
-Depois é só abrir `Atividade_ML_Vinicius.ipynb` e usar **Run → Run All Cells**.
+No Jupyter Lab, use *Kernel > Restart Kernel and Run All Cells* para rodar do início ao fim. Leva poucos segundos.
 
-### Opção 2: só com Python instalado (pip)
+Os gráficos usam tema escuro por conta própria. Para deixar o restante da interface escuro também: *Settings > Theme > JupyterLab Dark*.
 
-Precisa de Python 3.10 ou mais recente.
+## Resultados (conjunto de teste)
 
-**Windows (PowerShell ou Prompt de Comando):**
+| Parte | Modelo | Métricas |
+|---|---|---|
+| Classificação | Regressão Logística | Accuracy 0,965 · Precision 0,975 · Recall 0,929 · F1 0,951 (classe maligna) |
+| Regressão | Regressão Linear | MAE 0,533 · MSE 0,556 · RMSE 0,746 · R² 0,576 |
 
-```bat
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-jupyter lab
-```
+A análise desses números, incluindo as limitações de cada modelo, está no próprio notebook.
 
-Se o PowerShell bloquear o `activate`, rode antes `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`, ou use o Prompt de Comando.
+## Arquivos
 
-**Linux / macOS:**
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-jupyter lab
-```
-
-## Observações
-
-- **Dados:** o *Breast Cancer Wisconsin* já vem com o scikit-learn. O *California Housing* é baixado pelo scikit-learn na primeira execução. Se não houver internet, ou se o download falhar, o notebook usa automaticamente a cópia em `dados/california_housing.csv`, que é idêntica à versão do scikit-learn.
-- **Tema escuro:** todos os gráficos do notebook usam um tema escuro próprio. Se quiser o JupyterLab inteiro escuro também, vá em **Settings → Theme → JupyterLab Dark**.
-- **Reprodutibilidade:** todas as etapas aleatórias usam `SEED = 42`, então os números se repetem a cada execução.
-- **Versões testadas:** Python 3.12 (conda) e 3.13 (pip) com scikit-learn 1.9, pandas 3.1 e JupyterLab 4.6. Também testei com as versões mínimas do `requirements.txt` (Python 3.10, scikit-learn 1.3, pandas 2.0).
-
-## Estrutura
-
-```
-.
-├── Atividade_ML_Vinicius.ipynb   # notebook com as duas partes
-├── dados/
-│   └── california_housing.csv    # cópia local do California Housing (fallback)
-├── environment.yml               # ambiente conda
-├── requirements.txt              # dependências para pip
-└── README.md
-```
+- `Atividade_ML_Vinicius.ipynb`: o trabalho
+- `requirements.txt`: dependências para instalar com pip
+- `environment.yml`: ambiente conda
